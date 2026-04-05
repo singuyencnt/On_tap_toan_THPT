@@ -12,7 +12,6 @@
       background: linear-gradient(135deg, #eef5ff, #ffffff);
       color: #1f2937;
     }
-
     .banner {
       background: linear-gradient(135deg, #1d4ed8, #2563eb, #60a5fa);
       color: white;
@@ -21,9 +20,7 @@
       position: relative;
       overflow: hidden;
     }
-
-    .banner::before,
-    .banner::after {
+    .banner::before, .banner::after {
       content: "∫  π  Σ  √x  f(x)  Δ";
       position: absolute;
       font-size: 28px;
@@ -31,17 +28,8 @@
       letter-spacing: 18px;
       white-space: nowrap;
     }
-
-    .banner::before {
-      top: 15px;
-      left: 20px;
-    }
-
-    .banner::after {
-      bottom: 15px;
-      right: 20px;
-    }
-
+    .banner::before { top: 15px; left: 20px; }
+    .banner::after { bottom: 15px; right: 20px; }
     .banner h1 {
       margin: 0;
       font-size: 32px;
@@ -50,74 +38,58 @@
       margin-inline: auto;
       text-transform: uppercase;
     }
-
-    .container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-
+    .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
     .topics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 20px;
     }
-
     .topic-card {
       background: white;
       border-radius: 18px;
       padding: 22px;
-      text-decoration: none;
-      color: #1f2937;
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
       border: 1px solid #dbeafe;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .topic-header {
       display: flex;
       align-items: center;
       gap: 14px;
-      min-height: 100px;
+      cursor: pointer;
     }
-
-    .topic-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.18);
-    }
-
     .topic-number {
-      width: 46px;
-      height: 46px;
-      min-width: 46px;
-      border-radius: 12px;
-      background: #2563eb;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 18px;
+      width: 46px; height: 46px; min-width: 46px;
+      border-radius: 12px; background: #2563eb; color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 18px;
     }
-
-    .topic-title {
-      font-size: 18px;
-      line-height: 1.5;
-      font-weight: 600;
+    .topic-title { font-size: 18px; line-height: 1.5; font-weight: 600; }
+    .topic-options {
+      display: none;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid #dbeafe;
+      gap: 10px;
+      flex-wrap: wrap;
     }
-
-    footer {
-      margin-top: 50px;
-      background: #1e3a8a;
-      color: white;
+    .topic-options.show { display: flex; }
+    .option-btn {
+      flex: 1;
+      min-width: 140px;
       text-align: center;
-      padding: 30px 20px;
-      line-height: 1.8;
-      font-size: 18px;
+      text-decoration: none;
+      background: #eff6ff;
+      color: #1d4ed8;
+      padding: 12px 14px;
+      border-radius: 12px;
       font-weight: 600;
+      border: 1px solid #bfdbfe;
     }
-
-    @media (max-width: 768px) {
-      .banner h1 { font-size: 24px; }
-      .topic-title { font-size: 16px; }
-      footer { font-size: 16px; }
+    .option-btn:hover { background: #dbeafe; }
+    footer {
+      margin-top: 50px; background: #1e3a8a; color: white;
+      text-align: center; padding: 30px 20px; line-height: 1.8;
+      font-size: 18px; font-weight: 600;
     }
   </style>
 </head>
@@ -128,19 +100,31 @@
 
   <main class="container">
     <div class="topics-grid">
-      <a class="topic-card" href="chu_de_1.pdf" target="_blank"><div class="topic-number">1</div><div class="topic-title">Ứng dụng đạo hàm và khảo sát hàm số</div></a>
-      <a class="topic-card" href="chu_de_2.pdf" target="_blank"><div class="topic-number">2</div><div class="topic-title">Thống kê</div></a>
-      <a class="topic-card" href="chu_de_3.pdf" target="_blank"><div class="topic-number">3</div><div class="topic-title">Vectơ trong không gian</div></a>
-      <a class="topic-card" href="chu_de_4.pdf" target="_blank"><div class="topic-number">4</div><div class="topic-title">Nguyên hàm, tích phân, ứng dụng</div></a>
-      <a class="topic-card" href="chu_de_5.pdf" target="_blank"><div class="topic-number">5</div><div class="topic-title">Phương pháp tọa độ trong không gian</div></a>
-      <a class="topic-card" href="chu_de_6.pdf" target="_blank"><div class="topic-number">6</div><div class="topic-title">Xác suất</div></a>
-      <a class="topic-card" href="chu_de_7.pdf" target="_blank"><div class="topic-number">7</div><div class="topic-title">Hình học không gian</div></a>
-      <a class="topic-card" href="chu_de_8.pdf" target="_blank"><div class="topic-number">8</div><div class="topic-title">Dãy số - Cấp số cộng - Cấp số nhân</div></a>
-      <a class="topic-card" href="chu_de_9.pdf" target="_blank"><div class="topic-number">9</div><div class="topic-title">Lượng giác</div></a>
-      <a class="topic-card" href="chu_de_10.pdf" target="_blank"><div class="topic-number">10</div><div class="topic-title">Lý thuyết đồ thị</div></a>
-      <a class="topic-card" href="chu_de_11.pdf" target="_blank"><div class="topic-number">11</div><div class="topic-title">Phương trình, bất phương trình</div></a>
+      <script>
+        const topics = [
+          'Ứng dụng đạo hàm và khảo sát hàm số','Thống kê','Vectơ trong không gian','Nguyên hàm, tích phân, ứng dụng','Phương pháp tọa độ trong không gian','Xác suất','Hình học không gian','Dãy số - Cấp số cộng - Cấp số nhân','Lượng giác','Lý thuyết đồ thị','Phương trình, bất phương trình'
+        ];
+        document.write(topics.map((title, i) => `
+          <div class="topic-card">
+            <div class="topic-header" onclick="toggleOptions(${i+1})">
+              <div class="topic-number">${i+1}</div>
+              <div class="topic-title">${title}</div>
+            </div>
+            <div class="topic-options" id="options-${i+1}">
+              <a class="option-btn" href="ly_thuyet_${i+1}.pdf" target="_blank">📘 Xem lại lý thuyết</a>
+              <a class="option-btn" href="chu_de_${i+1}.pdf" target="_blank">✍️ Giải bài tập</a>
+            </div>
+          </div>
+        `).join(''));
+      </script>
     </div>
   </main>
+
+  <script>
+    function toggleOptions(id) {
+      document.getElementById(`options-${id}`).classList.toggle('show');
+    }
+  </script>
 
   <footer>
     <div>ÔN TẬP THI TỐT NGHIỆP THPT THEO LỘ TRÌNH CÁ NHÂN HÓA</div>
