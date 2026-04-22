@@ -3,133 +3,243 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ngân hàng câu hỏi ôn tập Toán THPT</title>
+  <title>Ngân hàng câu hỏi ôn tập Toán THPT - Cô Hồng Huệ</title>
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #eef5ff, #ffffff);
       color: #1f2937;
+      line-height: 1.6;
     }
     .banner {
       background: linear-gradient(135deg, #1d4ed8, #2563eb, #60a5fa);
       color: white;
-      padding: 40px 20px;
+      padding: 60px 20px;
       text-align: center;
       position: relative;
       overflow: hidden;
     }
     .banner::before, .banner::after {
-      content: "∫  π  Σ  √x  f(x)  Δ";
+      content: "∫ π Σ √x f(x) Δ";
       position: absolute;
-      font-size: 28px;
+      font-size: 24px;
       opacity: 0.15;
-      letter-spacing: 18px;
+      letter-spacing: 15px;
       white-space: nowrap;
     }
-    .banner::before { top: 15px; left: 20px; }
-    .banner::after { bottom: 15px; right: 20px; }
+    .banner::before { top: 15px; left: 10px; }
+    .banner::after { bottom: 15px; right: 10px; }
+    
     .banner h1 {
       margin: 0;
-      font-size: 32px;
-      line-height: 1.4;
-      max-width: 1100px;
+      font-size: 28px;
+      line-height: 1.3;
+      max-width: 900px;
       margin-inline: auto;
       text-transform: uppercase;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     }
-    .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+
+    .container { max-width: 1100px; margin: 30px auto; padding: 0 15px; }
+
     .topics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 20px;
     }
+
     .topic-card {
       background: white;
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
       border: 1px solid #dbeafe;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+    .topic-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(37, 99, 235, 0.1);
+    }
+
     .topic-header {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 15px;
       cursor: pointer;
     }
     .topic-number {
-      width: 46px; height: 46px; min-width: 46px;
-      border-radius: 12px; background: #2563eb; color: white;
+      width: 42px; height: 42px; min-width: 42px;
+      border-radius: 10px; background: #2563eb; color: white;
       display: flex; align-items: center; justify-content: center;
       font-weight: bold; font-size: 18px;
     }
-    .topic-title { font-size: 18px; line-height: 1.5; font-weight: 600; }
+    .topic-title { font-size: 17px; font-weight: 600; color: #1e3a8a; flex: 1; }
+
     .topic-options {
       display: none;
-      margin-top: 18px;
-      padding-top: 16px;
-      border-top: 1px solid #dbeafe;
-      gap: 10px;
-      flex-wrap: wrap;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 2px solid #f0f7ff;
+      flex-direction: column;
+      gap: 12px;
     }
-    .topic-options.show { display: flex; }
+    .topic-options.show { display: flex; animation: fadeIn 0.4s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .option-btn {
-      flex: 1;
-      min-width: 140px;
+      display: block;
       text-align: center;
       text-decoration: none;
-      background: #eff6ff;
-      color: #1d4ed8;
-      padding: 12px 14px;
+      padding: 14px;
       border-radius: 12px;
       font-weight: 600;
-      border: 1px solid #bfdbfe;
+      transition: all 0.2s;
+      font-size: 15px;
     }
-    .option-btn:hover { background: #dbeafe; }
+
+    /* Nút Lý Thuyết */
+    .theory-btn {
+      background: #2563eb;
+      color: white;
+      border: 1px solid #1d4ed8;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+    .theory-btn:hover { background: #1d4ed8; }
+
+    /* Nhóm Bài Tập */
+    .exercise-section {
+      background: #f8fafc;
+      padding: 15px;
+      border-radius: 15px;
+      border: 1px dashed #cbd5e1;
+    }
+    .exercise-title {
+      font-size: 14px;
+      font-weight: bold;
+      color: #475569;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .exercise-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .sub-btn {
+      background: white;
+      color: #334155;
+      border: 1px solid #e2e8f0;
+      font-size: 13px;
+      padding: 12px 8px;
+    }
+    .sub-btn:hover { background: #f1f5f9; border-color: #cbd5e1; color: #1d4ed8; }
+
+    .exam-btn {
+      grid-column: span 2;
+      background: #fff7ed;
+      color: #9a3412;
+      border: 1px solid #fed7aa;
+    }
+    .exam-btn:hover { background: #ffedd5; }
+
     footer {
-      margin-top: 50px; background: #1e3a8a; color: white;
-      text-align: center; padding: 30px 20px; line-height: 1.8;
-      font-size: 18px; font-weight: 600;
+      margin-top: 60px; background: #1e3a8a; color: white;
+      text-align: center; padding: 40px 20px; line-height: 1.8;
+    }
+
+    /* Tối ưu riêng cho Điện thoại */
+    @media (max-width: 600px) {
+      .banner { padding: 40px 15px; }
+      .banner h1 { font-size: 20px; }
+      .exercise-grid { grid-template-columns: 1fr; } /* Chuyển bài tập thành 1 cột dọc trên mobile */
+      .sub-btn { grid-column: span 2; font-size: 14px; }
+      .topic-card { padding: 15px; }
+      .topic-title { font-size: 15px; }
     }
   </style>
 </head>
 <body>
+
   <header class="banner">
-    <h1>NGÂN HÀNG CÂU HỎI ÔN TẬP THI TỐT NGHIỆP THPT MÔN TOÁN THEO CHỦ ĐỀ</h1>
+    <h1>NGÂN HÀNG CÂU HỎI ÔN TẬP TOÁN THPT<br>THEO LỘ TRÌNH CÁ NHÂN HÓA</h1>
   </header>
 
   <main class="container">
-    <div class="topics-grid">
-      <script>
-        const topics = [
-          'Ứng dụng đạo hàm và khảo sát hàm số','Thống kê','Vectơ trong không gian','Nguyên hàm, tích phân, ứng dụng','Phương pháp tọa độ trong không gian','Xác suất','Hình học không gian','Dãy số - Cấp số cộng - Cấp số nhân','Lượng giác','Lý thuyết đồ thị','Phương trình, bất phương trình'
-        ];
-        document.write(topics.map((title, i) => `
-          <div class="topic-card">
-            <div class="topic-header" onclick="toggleOptions(${i+1})">
-              <div class="topic-number">${i+1}</div>
-              <div class="topic-title">${title}</div>
-            </div>
-            <div class="topic-options" id="options-${i+1}">
-              <a class="option-btn" href="ly_thuyet_${i+1}.pdf" target="_blank">📘 Xem lại lý thuyết</a>
-              <a class="option-btn" href="chu_de_${i+1}.pdf" target="_blank">✍️ Giải bài tập</a>
-            </div>
-          </div>
-        `).join(''));
-      </script>
-    </div>
+    <div class="topics-grid" id="main-grid">
+      </div>
   </main>
 
+  <footer>
+    <div style="font-size: 18px; margin-bottom: 10px;">ÔN TẬP THI TỐT NGHIỆP THPT 2026</div>
+    <div style="font-weight: 300;">GV thực hiện: <span style="font-weight: 600;">PHAN HỒNG HUỆ</span></div>
+    <div style="font-weight: 300; opacity: 0.9;">Trường THPT Anh Hùng Núp</div>
+  </footer>
+
   <script>
+    const topics = [
+      'Ứng dụng đạo hàm và khảo sát hàm số',
+      'Thống kê',
+      'Vectơ trong không gian',
+      'Nguyên hàm, tích phân, ứng dụng',
+      'Phương pháp tọa độ trong không gian',
+      'Xác suất',
+      'Hình học không gian',
+      'Dãy số - Cấp số cộng - Cấp số nhân',
+      'Lượng giác',
+      'Lý thuyết đồ thị',
+      'Phương trình, bất phương trình'
+    ];
+
+    const grid = document.getElementById('main-grid');
+
+    grid.innerHTML = topics.map((title, i) => {
+      const id = i + 1;
+      return `
+        <div class="topic-card">
+          <div class="topic-header" onclick="toggleOptions(${id})">
+            <div class="topic-number">${id}</div>
+            <div class="topic-title">${title}</div>
+          </div>
+          
+          <div class="topic-options" id="options-${id}">
+            <a class="option-btn theory-btn" href="ly_thuyet_${id}.pdf" target="_blank">📘 Xem lại lý thuyết</a>
+            
+            <div class="exercise-section">
+              <div class="exercise-title">✍️ Giải bài tập theo dạng:</div>
+              <div class="exercise-grid">
+                <a class="option-btn sub-btn" href="chu_de_${id}_dang_1.pdf" target="_blank">Dạng 1: Nhiều lựa chọn</a>
+                <a class="option-btn sub-btn" href="chu_de_${id}_dang_2.pdf" target="_blank">Dạng 2: Đúng / Sai</a>
+                <a class="option-btn sub-btn" href="chu_de_${id}_dang_3.pdf" target="_blank">Dạng 3: Trả lời ngắn</a>
+                <a class="option-btn sub-btn exam-btn" href="chu_de_${id}_dethi.pdf" target="_blank">🎯 Đề tổng hợp chủ đề</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
     function toggleOptions(id) {
-      document.getElementById(`options-${id}`).classList.toggle('show');
+      const el = document.getElementById(`options-${id}`);
+      const isShowing = el.classList.contains('show');
+      
+      // Đóng các mục khác nếu muốn (tùy chọn)
+      // document.querySelectorAll('.topic-options').forEach(opt => opt.classList.remove('show'));
+      
+      if (!isShowing) {
+        el.classList.add('show');
+      } else {
+        el.classList.remove('show');
+      }
     }
   </script>
-
-  <footer>
-    <div>ÔN TẬP THI TỐT NGHIỆP THPT THEO LỘ TRÌNH CÁ NHÂN HÓA</div>
-    <div>CÔ PHAN HỒNG HUỆ</div>
-    <div>TRƯỜNG THPT ANH HÙNG NÚP</div>
-  </footer>
 </body>
 </html>
