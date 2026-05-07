@@ -96,23 +96,19 @@
       display: block;
       text-align: center;
       text-decoration: none;
-      padding: 14px;
-      border-radius: 12px;
+      padding: 12px;
+      border-radius: 10px;
       font-weight: 600;
       transition: all 0.2s;
-      font-size: 15px;
+      font-size: 14px;
     }
 
-    /* Nút Lý Thuyết */
     .theory-btn {
       background: #2563eb;
       color: white;
       border: 1px solid #1d4ed8;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
     }
-    .theory-btn:hover { background: #1d4ed8; }
 
-    /* Nhóm Bài Tập */
     .exercise-section {
       background: #f8fafc;
       padding: 15px;
@@ -120,50 +116,64 @@
       border: 1px dashed #cbd5e1;
     }
     .exercise-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: bold;
       color: #475569;
       margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
     }
     .exercise-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 8px;
     }
 
     .sub-btn {
       background: white;
       color: #334155;
       border: 1px solid #e2e8f0;
-      font-size: 13px;
-      padding: 12px 8px;
     }
-    .sub-btn:hover { background: #f1f5f9; border-color: #cbd5e1; color: #1d4ed8; }
-
     .exam-btn {
       grid-column: span 2;
       background: #fff7ed;
       color: #9a3412;
       border: 1px solid #fed7aa;
     }
-    .exam-btn:hover { background: #ffedd5; }
+
+    /* CSS riêng cho mục Luyện Đề */
+    .exam-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 8px;
+    }
+    .exam-name { font-weight: 600; font-size: 14px; color: #1e3a8a; }
+    .exam-actions { display: flex; gap: 5px; }
+    .btn-small {
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .btn-de { background: #eff6ff; color: #2563eb; border: 1px solid #bfdbfe; }
+    .btn-da { background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
 
     footer {
       margin-top: 60px; background: #1e3a8a; color: white;
       text-align: center; padding: 40px 20px; line-height: 1.8;
     }
 
-    /* Tối ưu riêng cho Điện thoại */
     @media (max-width: 600px) {
-      .banner { padding: 40px 15px; }
       .banner h1 { font-size: 20px; }
-      .exercise-grid { grid-template-columns: 1fr; } /* Chuyển bài tập thành 1 cột dọc trên mobile */
-      .sub-btn { grid-column: span 2; font-size: 14px; }
-      .topic-card { padding: 15px; }
-      .topic-title { font-size: 15px; }
+      .exercise-grid { grid-template-columns: 1fr; }
+      .sub-btn, .exam-btn { grid-column: span 1; }
+      .exam-list-item { flex-direction: column; gap: 10px; align-items: flex-start; }
+      .exam-actions { width: 100%; justify-content: space-between; }
+      .exam-actions a { flex: 1; text-align: center; }
     }
   </style>
 </head>
@@ -174,8 +184,7 @@
   </header>
 
   <main class="container">
-    <div class="topics-grid" id="main-grid">
-      </div>
+    <div class="topics-grid" id="main-grid"></div>
   </main>
 
   <footer>
@@ -196,23 +205,55 @@
       'Dãy số - Cấp số cộng - Cấp số nhân',
       'Lượng giác',
       'Lý thuyết đồ thị',
-      'Phương trình, bất phương trình'
+      'Phương trình, bất phương trình',
+      'LUYỆN GIẢI ĐỀ' // Mục số 12
     ];
 
     const grid = document.getElementById('main-grid');
 
     grid.innerHTML = topics.map((title, i) => {
       const id = i + 1;
+      
+      // Nếu là mục số 12 (Luyện giải đề)
+      if (id === 12) {
+        let examHtml = '';
+        for(let j = 1; j <= 5; j++) {
+          examHtml += `
+            <div class="exam-list-item">
+              <span class="exam-name">Đề ôn tập số ${j}</span>
+              <div class="exam-actions">
+                <a href="de${j}.pdf" target="_blank" class="btn-small btn-de">📄 Xem Đề</a>
+                <a href="dapan${j}.pdf" target="_blank" class="btn-small btn-da">🔑 Đáp án</a>
+              </div>
+            </div>
+          `;
+        }
+        
+        return `
+          <div class="topic-card" style="border: 2px solid #2563eb;">
+            <div class="topic-header" onclick="toggleOptions(${id})">
+              <div class="topic-number" style="background: #e11d48;">${id}</div>
+              <div class="topic-title" style="color: #e11d48;">${title}</div>
+            </div>
+            <div class="topic-options" id="options-${id}">
+              <div class="exercise-section" style="background: #fff1f2; border-color: #fecdd3;">
+                <div class="exercise-title" style="color: #be123c;">📚 DANH SÁCH ĐỀ THI THỬ:</div>
+                ${examHtml}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Các mục từ 1-11
       return `
         <div class="topic-card">
           <div class="topic-header" onclick="toggleOptions(${id})">
             <div class="topic-number">${id}</div>
             <div class="topic-title">${title}</div>
           </div>
-          
           <div class="topic-options" id="options-${id}">
             <a class="option-btn theory-btn" href="ly_thuyet_${id}.pdf" target="_blank">📘 Xem lại lý thuyết</a>
-            
             <div class="exercise-section">
               <div class="exercise-title">✍️ Giải bài tập theo dạng:</div>
               <div class="exercise-grid">
@@ -229,16 +270,7 @@
 
     function toggleOptions(id) {
       const el = document.getElementById(`options-${id}`);
-      const isShowing = el.classList.contains('show');
-      
-      // Đóng các mục khác nếu muốn (tùy chọn)
-      // document.querySelectorAll('.topic-options').forEach(opt => opt.classList.remove('show'));
-      
-      if (!isShowing) {
-        el.classList.add('show');
-      } else {
-        el.classList.remove('show');
-      }
+      el.classList.toggle('show');
     }
   </script>
 </body>
